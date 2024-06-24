@@ -1,95 +1,48 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+// import Image from "next/image";
 
 export default function Home() {
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
+    /*<main className={styles.main}>*/
+    /*<Image className={styles.logo} src="/next.svg" alt="Next.js Logo" width={180} height={37} priority />*/
+    
+    /**
+     <div className='bg-[#ffe5ff] h-min md:h-screen p-10 sm:p-16 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 sm:grid-rows-5 md:grid-rows-4 gap-3 lg:gap-6'>
+      <div className='bg-blue-500 text-white text-center text-5xl py-4 rounded-lg row-span-2 md:row-span-4'>1</div>
+      <div className='bg-blue-500 text-white text-center text-5xl py-4 rounded-lg sm:col-span-2 md:col-span-3'>2</div>
+      <div className='bg-blue-500 text-white text-center text-5xl py-4 rounded-lg'>3</div>
+      <div className='bg-blue-500 text-white text-center text-5xl py-4 rounded-lg'>4</div>
+      <div className='bg-blue-500 text-white text-center text-5xl py-4 rounded-lg md:row-span-2'>5</div>
+      <div className='bg-blue-500 text-white text-center text-5xl py-4 rounded-lg'>6</div>
+      <div className='bg-blue-500 text-white text-center text-5xl py-4 rounded-lg'>7</div>
+      <div className='bg-blue-500 text-white text-center text-5xl py-4 rounded-lg col-span-2 sm:col-span-3'>8</div>
+     </div>
+     */
+
+    <div className='bg-[#ffe5ff] h-min md:h-screen p-10 sm:p-16 grid grid-cols-2 sm:grid-cols-3 gap-3 lg:gap-6'>
+      <div className={`bg-[url('/img/agendas.jpg')] bg-cover text-white flex items-center justify-center text-center text-5xl py-4 rounded-lg`}>
+        Agendas
       </div>
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
+      <div className={`bg-[url('/img/artesanias.jpg')] bg-cover text-white flex items-center justify-center text-center text-5xl py-4 rounded-lg`}>
+        Artesanías
       </div>
 
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
+      <div className={`bg-[url('/img/eventos.jpg')] bg-cover text-white flex items-center justify-center text-center text-5xl py-4 rounded-lg`}>
+        Decoraciones y Eventos
       </div>
-    </main>
+      
+      <div className={`bg-[url('/img/pasteleria.jpg')] bg-contain text-white flex items-center justify-center text-center text-5xl py-4 rounded-lg`}>
+        Pastelería
+      </div>
+
+      <div className={`bg-[url('/img/reposteria.png')] bg-cover text-white flex items-center justify-center text-center text-5xl py-4 rounded-lg`}>
+        Repostería
+      </div>
+      
+      <div className={`bg-[url('/img/scrapbook.jpg')] bg-cover text-white flex items-center justify-center text-center text-5xl py-4 rounded-lg`}>
+        Scrapbook
+      </div>
+    </div>
   );
 }
