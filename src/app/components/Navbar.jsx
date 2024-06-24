@@ -38,11 +38,11 @@ export const NavBar = () => {
                     <Link href='/' className='mx-2 hover:text-gray-300 font-bold'>
                         Principal
                     </Link>
-                    |
+                    
                     <Link href='/about' className='mx-2 hover:text-gray-300 font-bold'>
                         Acerca de
                     </Link>
-                    |
+                    
                     <Link href='/contact' className='mx-2 hover:text-gray-300 font-bold'>
                         Contacto
                     </Link>

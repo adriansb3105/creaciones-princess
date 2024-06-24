@@ -20,27 +20,27 @@ export default function Home() {
      */
 
     <div className='bg-[#ffe5ff] h-min md:h-screen p-10 sm:p-16 grid grid-cols-2 sm:grid-cols-3 gap-3 lg:gap-6'>
-      <div className={`bg-[url('/img/agendas.jpg')] bg-cover text-white flex items-center justify-center text-center text-5xl py-4 rounded-lg`}>
+      <div className={`bg-[url('/img/agendas.jpg')] bg-cover text-white flex items-center justify-center text-center text-base md:text-lg lg:text-2xl xl:text-3xl 2xl:text-5xl py-4 rounded-lg`}>
         Agendas
       </div>
 
-      <div className={`bg-[url('/img/artesanias.jpg')] bg-cover text-white flex items-center justify-center text-center text-5xl py-4 rounded-lg`}>
+      <div className={`bg-[url('/img/artesanias.jpg')] bg-cover text-white flex items-center justify-center text-center text-base md:text-lg lg:text-2xl xl:text-3xl 2xl:text-5xl py-4 rounded-lg`}>
         Artesanías
       </div>
 
-      <div className={`bg-[url('/img/eventos.jpg')] bg-cover text-white flex items-center justify-center text-center text-5xl py-4 rounded-lg`}>
+      <div className={`bg-[url('/img/eventos.jpg')] bg-cover text-white flex items-center justify-center text-center text-base md:text-lg lg:text-2xl xl:text-3xl 2xl:text-5xl py-4 rounded-lg`}>
         Decoraciones y Eventos
       </div>
       
-      <div className={`bg-[url('/img/pasteleria.jpg')] bg-contain text-white flex items-center justify-center text-center text-5xl py-4 rounded-lg`}>
+      <div className={`bg-[url('/img/pasteleria.jpg')] bg-contain text-white flex items-center justify-center text-center text-base md:text-lg lg:text-2xl xl:text-3xl 2xl:text-5xl py-4 rounded-lg`}>
         Pastelería
       </div>
 
-      <div className={`bg-[url('/img/reposteria.png')] bg-cover text-white flex items-center justify-center text-center text-5xl py-4 rounded-lg`}>
+      <div className={`bg-[url('/img/reposteria.png')] bg-cover text-white flex items-center justify-center text-center text-base md:text-lg lg:text-2xl xl:text-3xl 2xl:text-5xl py-4 rounded-lg`}>
         Repostería
       </div>
       
-      <div className={`bg-[url('/img/scrapbook.jpg')] bg-cover text-white flex items-center justify-center text-center text-5xl py-4 rounded-lg`}>
+      <div className={`bg-[url('/img/scrapbook.jpg')] bg-cover text-white flex items-center justify-center text-center text-base md:text-lg lg:text-2xl xl:text-3xl 2xl:text-5xl py-4 rounded-lg`}>
         Scrapbook
       </div>
     </div>
