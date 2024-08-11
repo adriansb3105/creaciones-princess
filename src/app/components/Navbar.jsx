@@ -31,7 +31,8 @@ export const NavBar = () => {
     return (
         <nav className='bg-[#fad5fa] text-[#dc95d4] p-4 sm:p-6 md:flex md:justify-between md:items-center'>
             <div className='container mx-auto flex justify-between items-center'>
-                <a href='/' className={`font-[Allura-Regular] text-5xl font-bold`}>
+                <a href='/' className={`flex gap-2 font-[Allura-Regular] text-5xl font-bold`}>
+                    <img src="/img/logo.png" alt="Creaciones Princess" width="32px"/>
                     Creaciones Princess
                 </a>
                 <div className={getMenuClasses()}>
