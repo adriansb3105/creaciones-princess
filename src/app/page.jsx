@@ -48,7 +48,7 @@ export default function Home() {
       {
         items?.map((item) => {
           return (
-          <Link href={item.link} className={`font-[Allura-Regular] font-bold bg-[url('/img/${item.image}')] bg-${item.cover} aspect-video text-white flex items-center justify-center text-center text-3xl lg:text-4xl md:text-2xl xl:text-4xl 2xl:text-5xl py-4 rounded-lg`}>
+          <Link key={item.link} href={item.link} className={`font-[Allura-Regular] font-bold bg-[url('/img/${item.image}')] bg-${item.cover} aspect-video text-white flex items-center justify-center text-center text-3xl lg:text-4xl md:text-2xl xl:text-4xl 2xl:text-5xl py-4 rounded-lg`}>
             {item.name}
           </Link>
         )})
