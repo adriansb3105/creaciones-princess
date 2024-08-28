@@ -31,20 +31,20 @@ export const NavBar = () => {
     return (
         <nav className='bg-[#fad5fa] text-[#dc95d4] p-4 sm:p-6 md:flex md:justify-between md:items-center'>
             <div className='container mx-auto flex justify-between items-center'>
-                <a href='/' className={`flex items-center gap-2 font-[Allura-Regular] text-5xl font-bold`}>
+                <Link href='/' className={`flex items-center gap-2 font-[Allura-Regular] text-5xl font-bold`}>
                     <img src="/img/logo.png" alt="Creaciones Princess" className='w-20'/>
                     Creaciones Princess
-                </a>
+                </Link>
                 <div className={getMenuClasses()}>
                     <Link href='/' className='mx-2 hover:text-gray-300 font-bold'>
                         Principal
                     </Link>
                     
-                    <Link href='/about' className='mx-2 hover:text-gray-300 font-bold'>
+                    <Link href='/acerca' className='mx-2 hover:text-gray-300 font-bold'>
                         Acerca de
                     </Link>
                     
-                    <Link href='/contact' className='mx-2 hover:text-gray-300 font-bold'>
+                    <Link href='/contacto' className='mx-2 hover:text-gray-300 font-bold'>
                         Contacto
                     </Link>
                 </div>
