@@ -36,15 +36,15 @@ export const NavBar = () => {
                     Creaciones Princess
                 </Link>
                 <div className={getMenuClasses()}>
-                    <Link href='/' className='mx-2 hover:text-gray-300 font-bold'>
+                    <Link href='/' className='mx-2 hover:text-gray-300 font-bold font-[Allura-Regular] text-2xl'>
                         Principal
                     </Link>
                     
-                    <Link href='/acerca' className='mx-2 hover:text-gray-300 font-bold'>
+                    <Link href='/acerca' className='mx-2 hover:text-gray-300 font-bold font-[Allura-Regular] text-2xl'>
                         Acerca de
                     </Link>
                     
-                    <Link href='/contacto' className='mx-2 hover:text-gray-300 font-bold'>
+                    <Link href='/contacto' className='mx-2 hover:text-gray-300 font-bold font-[Allura-Regular] text-2xl'>
                         Contacto
                     </Link>
                 </div>
