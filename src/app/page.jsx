@@ -6,38 +6,32 @@ const items = [
   {
     name: 'Agendas',
     link: 'agendas',
-    image: 'agendas.jpg',
-    cover: 'cover'
+    image: 'agendas.jpg'
   },
   {
     name: 'Artesanías',
     link: 'artesanias',
-    image: 'artesanias.jpg',
-    cover: 'cover'
+    image: 'artesanias.jpg'
   },
   {
     name: 'Decoraciones y Eventos',
     link: 'eventos',
-    image: 'eventos.jpg',
-    cover: 'cover'
+    image: 'eventos.jpg'
   },
   {
     name: 'Pastelería',
     link: 'pasteleria',
-    image: 'pasteleria.jpg',
-    cover: 'contain'
+    image: 'pasteleria.jpg'
   },
   {
     name: 'Repostería',
     link: 'reposteria',
-    image: 'reposteria.png',
-    cover: 'cover'
+    image: 'reposteria.png'
   },
   {
     name: 'Scrapbook',
     link: 'scrapbook',
-    image: 'scrapbook.jpg',
-    cover: 'cover'
+    image: 'scrapbook.jpg'
   }
 ]
 
@@ -48,9 +42,13 @@ export default function Home() {
       {
         items?.map((item) => {
           return (
-          <Link key={item.link} href={item.link} className={`font-[Allura-Regular] font-bold bg-[url('/img/${item.image}')] bg-${item.cover} aspect-video text-white flex items-center justify-center text-center text-3xl lg:text-4xl md:text-2xl xl:text-4xl 2xl:text-5xl py-4 rounded-lg`}>
-            {item.name}
-          </Link>
+            <Link key={item.link} href={item.link} className="relative">
+              <img src={`/img/${item.image}`} className='aspect-video rounded-lg'/>
+
+              <div className='w-full h-full top-0 left-0 absolute flex justify-center items-center flex-col'>
+                <h1 className='font-[Allura-Regular] font-bold text-white text-3xl md:text-2xl lg:text-4xl xl:text-4xl 2xl:text-5xl'>{item.name}</h1>
+              </div>
+            </Link>
         )})
       }
     </section>
