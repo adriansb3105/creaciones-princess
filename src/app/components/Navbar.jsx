@@ -31,8 +31,8 @@ export const NavBar = () => {
     return (
         <nav className='bg-[#fad5fa] text-[#dc95d4] p-4 sm:p-6 md:flex md:justify-between md:items-center'>
             <div className='container mx-auto flex justify-between items-center'>
-                <a href='/' className={`flex gap-2 font-[Allura-Regular] text-5xl font-bold`}>
-                    <img src="/img/logo.png" alt="Creaciones Princess" width="32px"/>
+                <a href='/' className={`flex items-center gap-2 font-[Allura-Regular] text-5xl font-bold`}>
+                    <img src="/img/logo.png" alt="Creaciones Princess" className='w-20'/>
                     Creaciones Princess
                 </a>
                 <div className={getMenuClasses()}>
