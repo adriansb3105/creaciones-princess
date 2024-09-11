@@ -3,7 +3,7 @@
 import Link from "next/link"
 
 const items = [
-  /*{
+  {
     name: 'Agendas',
     link: 'agendas',
     image: 'agendas.jpg'
@@ -17,13 +17,13 @@ const items = [
     name: 'Decoraciones y Eventos',
     link: 'eventos',
     image: 'eventos.jpg'
-  },*/
+  },
   {
     name: 'Pastelería',
     link: 'pasteleria',
     image: 'pasteleria.jpg'
   },
-  /*{
+  {
     name: 'Repostería',
     link: 'reposteria',
     image: 'reposteria.png'
@@ -32,12 +32,13 @@ const items = [
     name: 'Scrapbook',
     link: 'scrapbook',
     image: 'scrapbook.jpg'
-  }*/
+  }
 ]
+
 
 export default function Home() {
   return (
-    <section className='bg-[#ffe5ff] h-min md:h-screen p-10 sm:p-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 lg:gap-6'>
+    <section className='bg-[#ffe5ff] h-min md:h-screen p-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 lg:gap-6'>
       {
         items?.map((item) => {
           return (

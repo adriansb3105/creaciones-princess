@@ -8,9 +8,9 @@ const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="es" className='flex flex-col m-0 p-0 box-border list-none font-serif h-full min-h-full'>
+    <html lang="es" className="h-full">
       <Head />
-      <body className={`${inter.className} flex flex-col m-0 p-0 box-border list-none font-serif min-h-full `}>
+      <body className={`${inter.className} flex flex-col m-0 p-0 box-border list-none min-h-full font-[Allura-Regular]`}>
         <NavBar />
         {children}
         <Footer/>
