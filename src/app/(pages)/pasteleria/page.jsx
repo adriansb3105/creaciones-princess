@@ -30,9 +30,9 @@ export default function Pasteleria() {
 
               <p className="text-2xl text-gray-600">{torta.description}</p>
               
-              <div className="flex items-center justify-between mt-2">
+              {/*<div className="flex items-center justify-between mt-2">
                 <span className="text-lg font-bold">₡ {torta.price}</span>
-              </div>
+              </div>*/}
             </div>
           </div>
         ))}
