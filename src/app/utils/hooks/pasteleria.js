@@ -63,177 +63,150 @@ export const pasteles = {
                 description: 'Deliciosa torta fría de Snicker en tajada',
                 url: '/tortas-frias/tortas/snicker-tajada.jpg',
             },
-
-
-
-
-
-
-
-
-
-            
             {
                 id: 11,
-                name: 'Torta Fría de Piña Colada en Tajada',
-                description: 'Deliciosa torta fría de Piña Colada en tajada',
-                url: '/tortas-frias/tortas/pinacolada-entera.jpg',
+                name: 'Torta Fría de Rompope y Frutas Entera',
+                description: 'Deliciosa torta fría de Rompope y Frutas entera',
+                url: '/tortas-frias/tortas/rompopefrutas-entera.jpg',
             },
             {
                 id: 12,
-                name: 'Torta Fría de Piña Colada en Tajada',
-                description: 'Deliciosa torta fría de Piña Colada en tajada',
-                url: '/tortas-frias/tortas/pinacolada-tajada.jpg',
+                name: 'Torta Fría de Rompope y Frutas en Tajada',
+                description: 'Deliciosa torta fría de Rompope y Frutas en tajada',
+                url: '/tortas-frias/tortas/rompopefrutas-tajada.jpg',
             },
             {
                 id: 13,
-                name: 'Torta Fría de Piña Colada en Tajada',
-                description: 'Deliciosa torta fría de Piña Colada en tajada',
-                url: '/tortas-frias/tortas/pinacolada-entera.jpg',
+                name: 'Torta Fría de Pie de Limón Entera',
+                description: 'Deliciosa torta fría de Pie de Limón entera',
+                url: '/tortas-frias/tortas/pielimon-entera.jpg',
             },
             {
                 id: 14,
-                name: 'Torta Fría de Piña Colada en Tajada',
-                description: 'Deliciosa torta fría de Piña Colada en tajada',
-                url: '/tortas-frias/tortas/pinacolada-tajada.jpg',
+                name: 'Torta Fría de Pie de Limón en Tajada',
+                description: 'Deliciosa torta fría de Pie de Limón en tajada',
+                url: '/tortas-frias/tortas/pielimon-tajada.jpg',
             },
             {
                 id: 15,
-                name: 'Torta Fría de Piña Colada en Tajada',
-                description: 'Deliciosa torta fría de Piña Colada en tajada',
-                url: '/tortas-frias/tortas/pinacolada-entera.jpg',
+                name: 'Torta Fría de Pasión de Caramelo Entera',
+                description: 'Deliciosa torta fría de Pasión de Caramelo entera',
+                url: '/tortas-frias/tortas/pasioncaramelo-entera.jpg',
             },
             {
                 id: 16,
-                name: 'Torta Fría de Piña Colada en Tajada',
-                description: 'Deliciosa torta fría de Piña Colada en tajada',
-                url: '/tortas-frias/tortas/pinacolada-tajada.jpg',
+                name: 'Torta Fría de Pasión de Caramelo en Tajada',
+                description: 'Deliciosa torta fría de Pasión de Caramelo en tajada',
+                url: '/tortas-frias/tortas/pasioncaramelo-tajada.jpg',
             },
             {
                 id: 17,
-                name: 'Torta Fría de Piña Colada en Tajada',
-                description: 'Deliciosa torta fría de Piña Colada en tajada',
-                url: '/tortas-frias/tortas/pinacolada-entera.jpg',
+                name: 'Torta Fría Navideña Entera',
+                description: 'Deliciosa torta fría Navideña entera',
+                url: '/tortas-frias/tortas/navidena-entera.jpg',
             },
             {
                 id: 18,
-                name: 'Torta Fría de Piña Colada en Tajada',
-                description: 'Deliciosa torta fría de Piña Colada en tajada',
-                url: '/tortas-frias/tortas/pinacolada-tajada.jpg',
+                name: 'Torta Fría Navideña en Tajada',
+                description: 'Deliciosa torta fría Navideña en tajada',
+                url: '/tortas-frias/tortas/navidena-tajada.jpg',
             },
             {
                 id: 19,
-                name: 'Torta Fría de Piña Colada en Tajada',
-                description: 'Deliciosa torta fría de Piña Colada en tajada',
-                url: '/tortas-frias/tortas/pinacolada-entera.jpg',
+                name: 'Torta Fría de Naranja Holandesa Entera',
+                description: 'Deliciosa torta fría de Naranja Holandesa entera',
+                url: '/tortas-frias/tortas/naranjaholandesa-entera.jpg',
             },
             {
                 id: 20,
-                name: 'Torta Fría de Piña Colada en Tajada',
-                description: 'Deliciosa torta fría de Piña Colada en tajada',
-                url: '/tortas-frias/tortas/pinacolada-tajada.jpg',
+                name: 'Torta Fría de Naranja Holandesa en Tajada',
+                description: 'Deliciosa torta fría de Naranja Holandesa en tajada',
+                url: '/tortas-frias/tortas/naranjaholandesa-tajada.jpg',
             },
             {
                 id: 21,
-                name: 'Torta Fría de Piña Colada en Tajada',
-                description: 'Deliciosa torta fría de Piña Colada en tajada',
-                url: '/tortas-frias/tortas/pinacolada-entera.jpg',
+                name: 'Torta Fría de Mora y Fresas Entera',
+                description: 'Deliciosa torta fría de Mora y Fresas entera',
+                url: '/tortas-frias/tortas/morafresa-entera.jpg',
             },
             {
                 id: 22,
-                name: 'Torta Fría de Piña Colada en Tajada',
-                description: 'Deliciosa torta fría de Piña Colada en tajada',
-                url: '/tortas-frias/tortas/pinacolada-tajada.jpg',
+                name: 'Torta Fría de Mora y Fresas en Tajada',
+                description: 'Deliciosa torta fría de Mora y Fresas en tajada',
+                url: '/tortas-frias/tortas/morafresa-tajada.jpg',
             },
             {
                 id: 23,
-                name: 'Torta Fría de Piña Colada en Tajada',
-                description: 'Deliciosa torta fría de Piña Colada en tajada',
-                url: '/tortas-frias/tortas/pinacolada-entera.jpg',
+                name: 'Torta Fría de Higos y Ron Entera',
+                description: 'Deliciosa torta fría de Higos y Ron entera',
+                url: '/tortas-frias/tortas/higosron-entera.jpg',
             },
             {
                 id: 24,
-                name: 'Torta Fría de Piña Colada en Tajada',
-                description: 'Deliciosa torta fría de Piña Colada en tajada',
-                url: '/tortas-frias/tortas/pinacolada-tajada.jpg',
+                name: 'Torta Fría de Higos y Ron en Tajada',
+                description: 'Deliciosa torta fría de Higos y Ron en tajada',
+                url: '/tortas-frias/tortas/higosron-tajada.jpg',
             },
             {
                 id: 25,
-                name: 'Torta Fría de Piña Colada en Tajada',
-                description: 'Deliciosa torta fría de Piña Colada en tajada',
-                url: '/tortas-frias/tortas/pinacolada-entera.jpg',
+                name: 'Torta Fría de Galleta Oreo Entera',
+                description: 'Deliciosa torta fría de Galleta Oreo entera',
+                url: '/tortas-frias/tortas/galletaoreo-entera.jpg',
             },
             {
                 id: 26,
-                name: 'Torta Fría de Piña Colada en Tajada',
-                description: 'Deliciosa torta fría de Piña Colada en tajada',
-                url: '/tortas-frias/tortas/pinacolada-tajada.jpg',
+                name: 'Torta Fría de Galleta Oreo en Tajada',
+                description: 'Deliciosa torta fría de Galleta Oreo en tajada',
+                url: '/tortas-frias/tortas/galletaoreo-tajada.jpg',
             },
             {
                 id: 27,
-                name: 'Torta Fría de Piña Colada en Tajada',
-                description: 'Deliciosa torta fría de Piña Colada en tajada',
-                url: '/tortas-frias/tortas/pinacolada-entera.jpg',
+                name: 'Torta Fría de Churchill Entera',
+                description: 'Deliciosa torta fría de Churchill entera',
+                url: '/tortas-frias/tortas/churchill-entera.jpg',
             },
             {
                 id: 28,
-                name: 'Torta Fría de Piña Colada en Tajada',
-                description: 'Deliciosa torta fría de Piña Colada en tajada',
-                url: '/tortas-frias/tortas/pinacolada-tajada.jpg',
+                name: 'Torta Fría de Churchill en Tajada',
+                description: 'Deliciosa torta fría de Churchill en tajada',
+                url: '/tortas-frias/tortas/churchill-tajada.jpg',
             },
             {
                 id: 29,
-                name: 'Torta Fría de Piña Colada en Tajada',
-                description: 'Deliciosa torta fría de Piña Colada en tajada',
-                url: '/tortas-frias/tortas/pinacolada-entera.jpg',
+                name: 'Torta Fría de Choco Menta Entera',
+                description: 'Deliciosa torta fría de Choco Menta entera',
+                url: '/tortas-frias/tortas/chocomenta-entera.jpg',
             },
             {
                 id: 30,
-                name: 'Torta Fría de Piña Colada en Tajada',
-                description: 'Deliciosa torta fría de Piña Colada en tajada',
-                url: '/tortas-frias/tortas/pinacolada-tajada.jpg',
+                name: 'Torta Fría de Choco Menta en Tajada',
+                description: 'Deliciosa torta fría de Choco Menta en tajada',
+                url: '/tortas-frias/tortas/chocomenta-tajada.jpg',
             },
             {
                 id: 31,
-                name: 'Torta Fría de Piña Colada en Tajada',
-                description: 'Deliciosa torta fría de Piña Colada en tajada',
-                url: '/tortas-frias/tortas/pinacolada-entera.jpg',
+                name: 'Torta Fría de Chocofresa Entera',
+                description: 'Deliciosa torta fría de Chocofresa entera',
+                url: '/tortas-frias/tortas/chocofresa-entera.jpg',
             },
             {
                 id: 32,
-                name: 'Torta Fría de Piña Colada en Tajada',
-                description: 'Deliciosa torta fría de Piña Colada en tajada',
-                url: '/tortas-frias/tortas/pinacolada-tajada.jpg',
+                name: 'Torta Fría de Chocofresa en Tajada',
+                description: 'Deliciosa torta fría de Chocofresa en tajada',
+                url: '/tortas-frias/tortas/chocofresa-tajada.jpg',
             },
             {
                 id: 33,
-                name: 'Torta Fría de Piña Colada en Tajada',
-                description: 'Deliciosa torta fría de Piña Colada en tajada',
-                url: '/tortas-frias/tortas/pinacolada-entera.jpg',
+                name: 'Torta Fría de Choco Coco Entera',
+                description: 'Deliciosa torta fría de Choco Coco entera',
+                url: '/tortas-frias/tortas/chocococo-entera.jpg',
             },
             {
                 id: 34,
-                name: 'Torta Fría de Piña Colada en Tajada',
-                description: 'Deliciosa torta fría de Piña Colada en tajada',
-                url: '/tortas-frias/tortas/pinacolada-tajada.jpg',
-            }
+                name: 'Torta Fría de Choco Coco en Tajada',
+                description: 'Deliciosa torta fría de Choco Coco en tajada',
+                url: '/tortas-frias/tortas/chocococo-tajada.jpg',
+            },
         ]
     }
-
-    /*
-    
-    
-    rompopefrutas
-    pielimon
-    pasioncaramelo
-    navidena
-    naranjaholandesa
-    morafresa
-    higosron
-    galletaoreo
-    churchill
-    chocomenta
-    chocofresa
-    chocococo
-    */
 }
