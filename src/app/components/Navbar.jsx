@@ -13,13 +13,14 @@ export const NavBar = () => {
             menuClasses = [
                 'flex',
                 'absolute',
-                'top-[60px]',
+                'top-[100px]',
                 'bg-gray-800',
                 'w-full',
                 'p-4',
                 'left-0',
                 'gap-10',
-                'flex-col'
+                'flex-col',
+                'z-10'
             ]
         } else {
             menuClasses = ['hidden', 'md:flex']
