@@ -15,6 +15,7 @@ export default async function TortasFrias() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {pasteles.tortasFrias.tortas.map((torta) => (
             <Card
+            key={agenda.id}
             direction={{ base: 'column', sm: 'row' }}
             overflow='hidden'
             variant='outline'
