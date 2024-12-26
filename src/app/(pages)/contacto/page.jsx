@@ -1,3 +1,4 @@
+/*
 import { AiFillInstagram } from "react-icons/ai";
 
 export default async function Contacto(params) {
@@ -16,3 +17,4 @@ export default async function Contacto(params) {
         </div>
     )
 }
+    */

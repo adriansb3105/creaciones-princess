@@ -1,3 +1,4 @@
+/*
 export default async function Acerca(params) {
     return (
         <div className="flex items-center justify-center min-h-screen">
@@ -14,3 +15,4 @@ export default async function Acerca(params) {
     </div>
     )
 }
+    */

@@ -92,6 +92,7 @@ export const NavBar = () => {
 import { useState } from 'react'
 //import { Playfair_Display, Lato } from 'next/font/google'
 import Link from 'next/link'
+import Image from 'next/image'
 import { Menu, X } from 'lucide-react'
 
 //const playfair = Playfair_Display({ subsets: ['latin'] })
@@ -107,7 +108,7 @@ export function Navbar() {
       <div className="container mx-auto px-4 py-6 flex justify-between items-center">
         
         <Link id='inicio' href='/' className={`flex items-center gap-2 text-5xl font-bold text-[#dc95d4]`}>
-          <img src="/img/logo.png" alt="Creaciones Princess" className='w-20'/>
+          <Image src="/img/logo.png" alt="Creaciones Princess" className='w-20'/>
             Creaciones Princess
         </Link>
 

@@ -1,3 +1,4 @@
+/*
 import { getPasteles } from '@/src/app/utils/hooks/pasteleria'
 import Image from 'next/image'
 import { Card, CardBody, Heading, Stack, Text } from '@chakra-ui/react'
@@ -43,3 +44,4 @@ export default async function TortasFrias() {
     </div>
   )
 }
+  */

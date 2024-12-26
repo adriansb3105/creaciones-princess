@@ -1,3 +1,4 @@
+/*
 import AgendaSalon from './AgendaSalon'
 import AgendaSaprissa from './AgendaSaprissa'
 import Agenda4DiasPorHoja from './Agenda4DiasPorHoja'
@@ -125,3 +126,4 @@ export default function Agendas() {
     </main>
     )
 }
+    */

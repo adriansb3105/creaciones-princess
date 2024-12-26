@@ -1,3 +1,4 @@
+/*
 'use client'
 import React from 'react'
 import TortasFrias from './TortasFrias'
@@ -37,3 +38,4 @@ export default function Pasteleria() {
     </main>
     )
 }
+    */

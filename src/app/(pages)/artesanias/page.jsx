@@ -1,3 +1,4 @@
+/*
 export default async function Artesanias(params) {
     return (
         <h1>
@@ -5,3 +6,4 @@ export default async function Artesanias(params) {
         </h1>
     )
 }
+    */

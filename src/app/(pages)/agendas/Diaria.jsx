@@ -1,3 +1,4 @@
+/*
 import { getAgendas } from '@/src/app/utils/hooks/agendas'
 import Image from 'next/image'
 import { Card, CardBody, Heading, Stack, Text } from '@chakra-ui/react'
@@ -44,3 +45,4 @@ export default async function Diaria() {
     </div>
   )
 }
+  */

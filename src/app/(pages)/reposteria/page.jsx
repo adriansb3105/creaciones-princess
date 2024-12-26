@@ -1,3 +1,4 @@
+/*
 export default async function Reposteria(params) {
     return (
         <>
@@ -31,3 +32,5 @@ export default async function Reposteria(params) {
         </>
     )
 }
+
+*/

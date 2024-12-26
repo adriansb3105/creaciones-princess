@@ -1,3 +1,4 @@
+/*
 'use client'
 
 import { getAgendas } from '@/src/app/utils/hooks/agendas'
@@ -46,3 +47,4 @@ export default async function AgendaSalon() {
     </div>
   )
 }
+  */
