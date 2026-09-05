@@ -10,6 +10,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import CloudinaryUploader from '@/components/admin/CloudinaryUploader';
 import { useToast } from '@/hooks/use-toast';
+import { getCloudinaryVideoThumbnail } from '@/lib/utils';
 
 export default function AdminGalleryPage() {
   const { toast } = useToast();
@@ -74,16 +75,21 @@ export default function AdminGalleryPage() {
               <RadioGroupItem value="video" id="type-video" />
               <Label htmlFor="type-video">Video de YouTube</Label>
             </div>
+            <div className="flex items-center space-x-2">
+              <RadioGroupItem value="clip" id="type-clip" />
+              <Label htmlFor="type-clip">Video subido</Label>
+            </div>
           </RadioGroup>
 
-          {type === 'image' ? (
+          {type === 'image' && (
             <div>
               <Label>Imagen</Label>
               <div className="mt-1">
                 <CloudinaryUploader images={image ? [image] : []} onChange={(imgs) => setImage(imgs[0] || '')} multiple={false} />
               </div>
             </div>
-          ) : (
+          )}
+          {type === 'video' && (
             <div>
               <Label htmlFor="youtubeUrl">URL de YouTube</Label>
               <Input
@@ -93,6 +99,19 @@ export default function AdminGalleryPage() {
                 placeholder="https://www.youtube.com/watch?v=..."
                 className="mt-1"
               />
+            </div>
+          )}
+          {type === 'clip' && (
+            <div>
+              <Label>Video</Label>
+              <div className="mt-1">
+                <CloudinaryUploader
+                  images={image ? [image] : []}
+                  onChange={(vids) => setImage(vids[0] || '')}
+                  multiple={false}
+                  resourceType="video"
+                />
+              </div>
             </div>
           )}
 
@@ -115,12 +134,18 @@ export default function AdminGalleryPage() {
           {items.map((item) => (
             <div key={item.id} className="relative group rounded-lg overflow-hidden border border-pink-100 h-32">
               <Image
-                src={item.type === 'video' ? `https://img.youtube.com/vi/${item.youtubeVideoId}/hqdefault.jpg` : item.url}
+                src={
+                  item.type === 'video'
+                    ? `https://img.youtube.com/vi/${item.youtubeVideoId}/hqdefault.jpg`
+                    : item.type === 'clip'
+                      ? getCloudinaryVideoThumbnail(item.url)
+                      : item.url
+                }
                 alt={item.caption || 'Galería'}
                 fill
                 className="object-cover"
               />
-              {item.type === 'video' && (
+              {(item.type === 'video' || item.type === 'clip') && (
                 <PlayCircle className="absolute inset-0 m-auto h-8 w-8 text-white/90" />
               )}
               <button

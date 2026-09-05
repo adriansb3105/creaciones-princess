@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { LayoutDashboard, Package, FolderTree, ClipboardList, Images, Mail, Heart } from 'lucide-react';
+import { LayoutDashboard, Package, FolderTree, ClipboardList, Images, Mail, Heart, Share2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const NAV_ITEMS = [
@@ -11,6 +11,8 @@ const NAV_ITEMS = [
   { name: 'Categorías', href: '/admin/categorias', icon: FolderTree },
   { name: 'Pedidos', href: '/admin/pedidos', icon: ClipboardList },
   { name: 'Galería', href: '/admin/galeria', icon: Images },
+  { name: 'Publicar entrega', href: '/admin/publicar', icon: Share2 },
+  { name: 'Publicaciones', href: '/admin/publicaciones', icon: Share2 },
   { name: 'Mensajes', href: '/admin/mensajes', icon: Mail },
 ];
 

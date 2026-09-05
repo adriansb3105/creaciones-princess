@@ -64,11 +64,13 @@ const Lightbox = ({ images, currentIndex, onClose, onNext, onPrev }) => {
           initial={{ scale: 0.8 }}
           animate={{ scale: 1 }}
           exit={{ scale: 0.8 }}
-          className={cn('relative mx-4', item.type === 'video' ? 'w-full max-w-3xl' : 'max-w-5xl max-h-[90vh]')}
+          className={cn('relative mx-4', item.type === 'video' || item.type === 'clip' ? 'w-full max-w-3xl' : 'max-w-5xl max-h-[90vh]')}
           onClick={(e) => e.stopPropagation()}
         >
           {item.type === 'video' ? (
             <YouTubeEmbed videoId={item.youtubeVideoId} title={item.caption || 'Video'} />
+          ) : item.type === 'clip' ? (
+            <video src={item.url} controls autoPlay className="w-full rounded-xl shadow-lg max-h-[80vh]" />
           ) : (
             <Image
               src={item.url}

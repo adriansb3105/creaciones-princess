@@ -4,7 +4,9 @@ Sitio web y tienda para **Creaciones Princess**: postres, agendas y decoraciones
 artesanales. Catálogo por categorías y subcategorías, carrito de compras,
 checkout con adelanto del 50% coordinado por WhatsApp (Sinpe Móvil o
 transferencia — sin pasarela de pago), panel de administración privado, subida
-de imágenes a Cloudinary y videos embebidos de YouTube.
+de imágenes a Cloudinary, videos embebidos de YouTube, y una pantalla móvil
+(`/admin/publicar`) para publicar fotos/video de cada entrega en el sitio web,
+Instagram y Facebook con un solo formulario.
 
 ## Stack técnico
 
@@ -25,15 +27,17 @@ app/
 │   pedido-confirmado/[id]/, galeria/, sobre-nosotros/, contacto/
 ├── admin/
 │   ├── login/page.js            # login público del panel
+│   ├── publicar/page.js         # pantalla móvil: publicar entrega (foto+video+caption)
 │   └── (dashboard)/             # protegido por proxy.js + requireAdmin()
-│       page.js, productos/, categorias/, pedidos/, galeria/, mensajes/
+│       page.js, productos/, categorias/, pedidos/, galeria/, publicaciones/, mensajes/
 └── api/
     ├── categories/, products/, orders/, gallery/, contact/, contact-messages/
+    ├── social/publish/, social/publish/[id]/retry-instagram/
     └── admin/{login,logout,me,cloudinary/sign}/
 
 components/            # Navbar, Footer, ProductCard, Lightbox, YouTubeEmbed...
 components/admin/      # Sidebar, Header, ProductForm, CloudinaryUploader...
-lib/                   # mongodb.js, auth.js, constants.js, seed.js, utils.js
+lib/                   # mongodb.js, auth.js, constants.js, seed.js, utils.js, social.js
 hooks/use-cart.js      # carrito (Context + localStorage)
 proxy.js               # protege /admin y /api/admin (antes "middleware.js")
 ```
@@ -94,6 +98,50 @@ archivo que necesitas tocar para cambiarlos.
 4. Desde `/admin/pedidos` puedes ver cada pedido y cambiar su estado
    (pendiente → adelanto confirmado → en preparación → listo → entregado).
 
+## Publicar entregas en Instagram + Facebook automáticamente
+
+`/admin/publicar` es una pantalla pensada para el celular: se elige el
+producto (opcional), se suben fotos y/o un video, se escribe una descripción,
+y al presionar **Publicar** el sistema:
+
+1. Guarda las fotos/video en la galería del sitio (siempre, sin importar lo demás).
+2. Publica en la Página de Facebook (foto, álbum o video según lo que subiste).
+3. Publica en Instagram (foto, carrusel, o Reel si subiste video).
+
+Ambas redes se publican vía la **Graph API de Meta**, así que hace falta
+configurarlo una vez:
+
+1. **Instagram debe ser cuenta Empresa/Creador**, vinculada a una Página de
+   Facebook (Instagram → Configuración y privacidad → Tipo de cuenta y
+   herramientas).
+2. Crea una app en [developers.facebook.com](https://developers.facebook.com/apps) →
+   **Crear app** → tipo **Negocio**.
+3. Ve a la [Graph API Explorer](https://developers.facebook.com/tools/explorer/),
+   selecciona tu app, dale **Generate Access Token** e inicia sesión con la
+   cuenta que administra la Página. Otorga los permisos: `pages_show_list`,
+   `pages_read_engagement`, `pages_manage_posts`, `instagram_basic`,
+   `instagram_content_publish`.
+4. Convierte ese token en uno de **larga duración** (no expira mientras no se
+   revoque la app): en la Explorer, ícono de información (i) junto al token →
+   **Open in Access Token Tool** → **Extend Access Token**. Copia el token
+   extendido.
+5. Con ese token, llama `GET /me/accounts` (en la misma Explorer) — te
+   devuelve el **Page Access Token** y el **Page ID** de tu Página. Guarda
+   ambos como `META_PAGE_ACCESS_TOKEN` y `META_PAGE_ID`.
+6. Llama `GET /{page-id}?fields=instagram_business_account` — te da el
+   **Instagram Business Account ID**. Guárdalo como `META_IG_BUSINESS_ID`.
+7. Agrega las tres variables en `.env` (local) y en Vercel (producción).
+
+Si Meta no está configurado, `/admin/publicar` sigue guardando todo en la
+galería del sitio — solo Instagram/Facebook muestran un error claro en vez de
+publicar, así que es seguro usarlo antes de terminar esta configuración.
+
+**Nota:** los videos de Instagram (Reels) tardan unos segundos en procesarse;
+si no terminan a tiempo, la publicación queda en estado "Procesando" con un
+botón para **Reintentar** más tarde — no hay que volver a subir nada.
+**TikTok queda fuera de esta automatización por ahora** (su API de
+publicación requiere aprobación de TikTok que no está garantizada).
+
 ## Despliegue en Vercel
 
 El proyecto está listo para desplegar tal cual (sin `output: 'standalone'`,
@@ -116,10 +164,11 @@ con `serverExternalPackages` e imágenes remotas configuradas para Cloudinary):
 | `categories`         | Categorías con subcategorías embebidas                    |
 | `products`           | Productos (precio en colones, imágenes de Cloudinary)     |
 | `orders`             | Pedidos con totales recalculados en servidor               |
-| `gallery_items`      | Imágenes y videos de YouTube de la galería                 |
+| `gallery_items`      | Imágenes, videos de YouTube y videos subidos (`clip`) de la galería |
 | `contact_messages`   | Mensajes del formulario de contacto                        |
 | `admin_users`        | Usuarios del panel admin (contraseña cifrada con bcrypt)    |
 | `counters`           | Contador atómico para los números de pedido (`CP-...`)     |
+| `delivery_posts`     | Historial de publicaciones hechas desde `/admin/publicar` (con el resultado en cada red) |
 
 ## Próximas mejoras sugeridas
 
@@ -127,6 +176,7 @@ con `serverExternalPackages` e imágenes remotas configuradas para Cloudinary):
 - [ ] Reportes/estadísticas de ventas
 - [ ] PWA con notificaciones
 - [ ] Múltiples administradores con roles
+- [ ] Publicación automática en TikTok (pendiente de aprobación de su API)
 
 ---
 

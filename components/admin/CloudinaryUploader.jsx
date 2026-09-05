@@ -3,10 +3,9 @@
 import { useRef, useState } from 'react';
 import Image from 'next/image';
 import { Loader2, Upload, X } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 
-async function uploadToCloudinary(file) {
+async function uploadToCloudinary(file, resourceType) {
   const signRes = await fetch('/api/admin/cloudinary/sign', { method: 'POST' });
   if (!signRes.ok) {
     throw new Error('No se pudo firmar la subida (revisa la configuración de Cloudinary)');
@@ -20,21 +19,22 @@ async function uploadToCloudinary(file) {
   formData.append('signature', signature);
   formData.append('folder', folder);
 
-  const uploadRes = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
+  const uploadRes = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/${resourceType}/upload`, {
     method: 'POST',
     body: formData,
   });
 
   if (!uploadRes.ok) {
-    throw new Error('Cloudinary rechazó la imagen');
+    throw new Error(resourceType === 'video' ? 'Cloudinary rechazó el video' : 'Cloudinary rechazó la imagen');
   }
 
   const data = await uploadRes.json();
   return data.secure_url;
 }
 
-// images: array de URLs. multiple=false lo trata como una sola imagen (categorías).
-const CloudinaryUploader = ({ images = [], onChange, multiple = true }) => {
+// images: array de URLs. multiple=false lo trata como un solo archivo (categorías, video de entrega).
+// resourceType: 'image' | 'video'.
+const CloudinaryUploader = ({ images = [], onChange, multiple = true, resourceType = 'image' }) => {
   const inputRef = useRef(null);
   const [uploading, setUploading] = useState(false);
   const { toast } = useToast();
@@ -47,11 +47,11 @@ const CloudinaryUploader = ({ images = [], onChange, multiple = true }) => {
     try {
       const uploaded = [];
       for (const file of files) {
-        uploaded.push(await uploadToCloudinary(file));
+        uploaded.push(await uploadToCloudinary(file, resourceType));
       }
       onChange(multiple ? [...images, ...uploaded] : [uploaded[0]]);
     } catch (error) {
-      toast({ title: 'Error al subir imagen', description: error.message, variant: 'destructive' });
+      toast({ title: 'Error al subir', description: error.message, variant: 'destructive' });
     } finally {
       setUploading(false);
       if (inputRef.current) inputRef.current.value = '';
@@ -66,8 +66,12 @@ const CloudinaryUploader = ({ images = [], onChange, multiple = true }) => {
     <div className="space-y-3">
       <div className="flex flex-wrap gap-3">
         {images.map((url, index) => (
-          <div key={url + index} className="relative h-24 w-24 rounded-lg overflow-hidden border border-pink-100">
-            <Image src={url} alt={`Imagen ${index + 1}`} fill className="object-cover" />
+          <div key={url + index} className="relative h-24 w-24 rounded-lg overflow-hidden border border-pink-100 bg-black">
+            {resourceType === 'video' ? (
+              <video src={url} className="h-full w-full object-cover" muted />
+            ) : (
+              <Image src={url} alt={`Imagen ${index + 1}`} fill className="object-cover" />
+            )}
             <button
               type="button"
               onClick={() => removeImage(index)}
@@ -92,7 +96,8 @@ const CloudinaryUploader = ({ images = [], onChange, multiple = true }) => {
       <input
         ref={inputRef}
         type="file"
-        accept="image/*"
+        accept={resourceType === 'video' ? 'video/*' : 'image/*'}
+        capture={resourceType === 'video' ? 'environment' : undefined}
         multiple={multiple}
         className="hidden"
         onChange={(e) => handleFiles(e.target.files)}

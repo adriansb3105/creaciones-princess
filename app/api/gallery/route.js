@@ -28,12 +28,12 @@ export async function POST(request) {
     const body = await request.json();
     const { type, url, youtubeUrl, caption } = body;
 
-    if (type !== 'image' && type !== 'video') {
+    if (!['image', 'video', 'clip'].includes(type)) {
       return Response.json({ error: 'Tipo inválido' }, { status: 400 });
     }
 
-    if (type === 'image' && !url) {
-      return Response.json({ error: 'La imagen es requerida' }, { status: 400 });
+    if ((type === 'image' || type === 'clip') && !url) {
+      return Response.json({ error: type === 'clip' ? 'El video es requerido' : 'La imagen es requerida' }, { status: 400 });
     }
 
     const youtubeVideoId = type === 'video' ? getYouTubeId(youtubeUrl) : null;
@@ -47,7 +47,7 @@ export async function POST(request) {
     const item = {
       id: uuidv4(),
       type,
-      url: type === 'image' ? url : null,
+      url: type === 'image' || type === 'clip' ? url : null,
       youtubeVideoId,
       caption: caption || '',
       order: count,

@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { PlayCircle } from 'lucide-react';
 import Lightbox from '@/components/Lightbox';
+import { getCloudinaryVideoThumbnail } from '@/lib/utils';
 
 const GaleriaPage = () => {
   const [items, setItems] = useState([]);
@@ -61,14 +62,20 @@ const GaleriaPage = () => {
                 >
                   <div className="relative">
                     <Image
-                      src={item.type === 'video' ? `https://img.youtube.com/vi/${item.youtubeVideoId}/hqdefault.jpg` : item.url}
+                      src={
+                        item.type === 'video'
+                          ? `https://img.youtube.com/vi/${item.youtubeVideoId}/hqdefault.jpg`
+                          : item.type === 'clip'
+                            ? getCloudinaryVideoThumbnail(item.url)
+                            : item.url
+                      }
                       alt={item.caption || `Galería ${index + 1}`}
                       width={600}
                       height={400}
                       className="w-full h-auto object-cover group-hover:scale-110 transition-transform duration-300"
                     />
                     <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 flex items-center justify-center">
-                      {item.type === 'video' ? (
+                      {item.type === 'video' || item.type === 'clip' ? (
                         <PlayCircle className="h-14 w-14 text-white/90 group-hover:scale-110 transition-transform duration-300" />
                       ) : (
                         <span className="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 font-medium">
