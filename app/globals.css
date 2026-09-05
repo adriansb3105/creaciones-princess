@@ -1,30 +1,30 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Great+Vibes&display=swap');
+@import "tailwindcss";
+@config "../tailwind.config.js";
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@custom-variant dark (&:where(.dark, .dark *));
 
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 340 10% 10%;
+    --foreground: 200 15% 15%;
     --card: 0 0% 100%;
-    --card-foreground: 340 10% 10%;
+    --card-foreground: 200 15% 15%;
     --popover: 0 0% 100%;
-    --popover-foreground: 340 10% 10%;
-    --primary: 340 82% 72%;
+    --popover-foreground: 200 15% 15%;
+    --primary: 340 70% 66%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 39 76% 87%;
-    --secondary-foreground: 340 10% 10%;
-    --muted: 340 30% 96%;
-    --muted-foreground: 340 10% 45%;
-    --accent: 45 93% 85%;
-    --accent-foreground: 340 10% 10%;
+    --secondary: 160 45% 90%;
+    --secondary-foreground: 165 35% 18%;
+    --muted: 165 25% 96%;
+    --muted-foreground: 210 10% 40%;
+    --accent: 162 50% 42%;
+    --accent-foreground: 0 0% 100%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-    --border: 340 20% 92%;
-    --input: 340 20% 92%;
-    --ring: 340 82% 72%;
+    --border: 165 20% 90%;
+    --input: 165 20% 90%;
+    --ring: 340 70% 66%;
     --radius: 0.75rem;
   }
 }
@@ -37,7 +37,7 @@
     @apply bg-background text-foreground font-sans;
     font-family: 'Poppins', sans-serif;
   }
-  
+
   .font-cursive {
     font-family: 'Great Vibes', cursive;
   }
@@ -55,14 +55,14 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #fef3f4;
+  background: #f2fbf7;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #f5a6c1;
+  background: #f2a6c4;
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #f28fb0;
+  background: #ec84ac;
 }

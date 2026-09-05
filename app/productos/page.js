@@ -1,75 +1,68 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { Suspense, useEffect, useState, useCallback } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Search } from 'lucide-react';
 import ProductCard from '@/components/ProductCard';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 
-const ProductosPage = () => {
-  const [products, setProducts] = useState([]);
-  const [filteredProducts, setFilteredProducts] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState('Todos');
-  const [searchTerm, setSearchTerm] = useState('');
-  const [loading, setLoading] = useState(true);
+function ProductosContent() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
 
-  const categories = ['Todos', 'Pasteles', 'Postres', 'Artesanías', 'Decoraciones'];
+  const [categories, setCategories] = useState([]);
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const selectedCategory = searchParams.get('category') || 'todos';
+  const selectedSubcategory = searchParams.get('subcategory') || 'todos';
 
   useEffect(() => {
-    fetchProducts();
+    fetch('/api/categories')
+      .then((r) => r.json())
+      .then((data) => setCategories(data?.categories || []))
+      .catch(() => setCategories([]));
   }, []);
 
   useEffect(() => {
-    filterProducts();
-  }, [selectedCategory, searchTerm, products]);
+    setLoading(true);
+    const params = new URLSearchParams();
+    if (selectedCategory !== 'todos') params.set('category', selectedCategory);
+    if (selectedSubcategory !== 'todos') params.set('subcategory', selectedSubcategory);
+    if (searchTerm) params.set('search', searchTerm);
 
-  const fetchProducts = async () => {
-    try {
-      const response = await fetch('/api/products');
-      const data = await response.json();
-      setProducts(data?.products || []);
-      setFilteredProducts(data?.products || []);
-    } catch (error) {
-      console.error('Error fetching products:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
+    fetch(`/api/products?${params.toString()}`)
+      .then((r) => r.json())
+      .then((data) => setProducts(data?.products || []))
+      .catch(() => setProducts([]))
+      .finally(() => setLoading(false));
+  }, [selectedCategory, selectedSubcategory, searchTerm]);
 
-  const filterProducts = () => {
-    let filtered = products;
+  const updateFilters = useCallback(
+    (categorySlug, subcategorySlug) => {
+      const params = new URLSearchParams();
+      if (categorySlug && categorySlug !== 'todos') params.set('category', categorySlug);
+      if (subcategorySlug && subcategorySlug !== 'todos') params.set('subcategory', subcategorySlug);
+      router.push(`/productos${params.toString() ? `?${params.toString()}` : ''}`, { scroll: false });
+    },
+    [router]
+  );
 
-    // Filter by category
-    if (selectedCategory !== 'Todos') {
-      filtered = filtered.filter((p) => p.category === selectedCategory);
-    }
-
-    // Filter by search term
-    if (searchTerm) {
-      filtered = filtered.filter(
-        (p) =>
-          p.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          p.description.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-    }
-
-    setFilteredProducts(filtered);
-  };
+  const activeCategory = categories.find((c) => c.slug === selectedCategory);
+  const categoryNameById = (categoryId) => categories.find((c) => c.id === categoryId)?.name;
 
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-pink-50 via-cream-50 to-pink-50 py-20">
+      <section className="bg-gradient-to-br from-pink-50 via-mint-50 to-pink-50 py-20">
         <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-center"
-          >
-            <h1 className="text-5xl md:text-6xl font-cursive text-pink-500 mb-4">Nuestros Productos</h1>
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center">
+            <h1 className="text-5xl md:text-6xl font-cursive text-primary mb-4">Nuestra Tienda</h1>
             <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-              Descubre nuestra colección de creaciones artesanales, cada una hecha con amor y dedicación
+              Postres, agendas y decoraciones artesanales — cada una hecha con amor y dedicación
             </p>
           </motion.div>
         </div>
@@ -77,26 +70,36 @@ const ProductosPage = () => {
 
       {/* Filters Section */}
       <section className="py-8 bg-white sticky top-20 z-30 shadow-sm">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-4 space-y-4">
           <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
-            {/* Category Filters */}
             <div className="flex flex-wrap gap-2">
+              <Button
+                onClick={() => updateFilters('todos', 'todos')}
+                variant={selectedCategory === 'todos' ? 'default' : 'outline'}
+                className={
+                  selectedCategory === 'todos'
+                    ? 'bg-gradient-to-r from-primary to-pink-500'
+                    : 'border-pink-300 text-primary hover:bg-pink-50'
+                }
+              >
+                Todos
+              </Button>
               {categories.map((category) => (
                 <Button
-                  key={category}
-                  onClick={() => setSelectedCategory(category)}
-                  variant={selectedCategory === category ? 'default' : 'outline'}
-                  className={selectedCategory === category
-                    ? 'bg-gradient-to-r from-pink-400 to-pink-500'
-                    : 'border-pink-300 text-pink-500 hover:bg-pink-50'
+                  key={category.id}
+                  onClick={() => updateFilters(category.slug, 'todos')}
+                  variant={selectedCategory === category.slug ? 'default' : 'outline'}
+                  className={
+                    selectedCategory === category.slug
+                      ? 'bg-gradient-to-r from-primary to-pink-500'
+                      : 'border-pink-300 text-primary hover:bg-pink-50'
                   }
                 >
-                  {category}
+                  {category.name}
                 </Button>
               ))}
             </div>
 
-            {/* Search Bar */}
             <div className="relative w-full md:w-80">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
               <Input
@@ -104,10 +107,34 @@ const ProductosPage = () => {
                 placeholder="Buscar productos..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10 border-pink-200 focus:border-pink-400"
+                className="pl-10 border-pink-200 focus:border-primary"
               />
             </div>
           </div>
+
+          {activeCategory && activeCategory.subcategories?.length > 0 && (
+            <div className="flex flex-wrap gap-2">
+              <Button
+                size="sm"
+                onClick={() => updateFilters(selectedCategory, 'todos')}
+                variant={selectedSubcategory === 'todos' ? 'secondary' : 'ghost'}
+                className="text-mint-700"
+              >
+                Todas
+              </Button>
+              {activeCategory.subcategories.map((sub) => (
+                <Button
+                  key={sub.id}
+                  size="sm"
+                  onClick={() => updateFilters(selectedCategory, sub.slug)}
+                  variant={selectedSubcategory === sub.slug ? 'secondary' : 'ghost'}
+                  className="text-mint-700"
+                >
+                  {sub.name}
+                </Button>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
@@ -118,18 +145,18 @@ const ProductosPage = () => {
             <div className="text-center py-20">
               <p className="text-gray-600 text-lg">Cargando productos...</p>
             </div>
-          ) : filteredProducts.length === 0 ? (
+          ) : products.length === 0 ? (
             <div className="text-center py-20">
               <p className="text-gray-600 text-lg">No se encontraron productos</p>
             </div>
           ) : (
             <>
               <p className="text-gray-600 mb-6">
-                Mostrando {filteredProducts.length} producto{filteredProducts.length !== 1 ? 's' : ''}
+                Mostrando {products.length} producto{products.length !== 1 ? 's' : ''}
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {filteredProducts.map((product) => (
-                  <ProductCard key={product.id} product={product} />
+                {products.map((product) => (
+                  <ProductCard key={product.id} product={product} categoryName={categoryNameById(product.categoryId)} />
                 ))}
               </div>
             </>
@@ -138,6 +165,12 @@ const ProductosPage = () => {
       </section>
     </div>
   );
-};
+}
 
-export default ProductosPage;
+export default function ProductosPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen" />}>
+      <ProductosContent />
+    </Suspense>
+  );
+}

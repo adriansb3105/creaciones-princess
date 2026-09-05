@@ -2,13 +2,21 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { MapPin, Phone, Mail, Clock, Send } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, Send, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
-import { Toaster } from '@/components/ui/toaster';
+import {
+  BUSINESS_EMAIL,
+  BUSINESS_HOURS,
+  BUSINESS_LOCATION_NOTE,
+  WHATSAPP_PRIMARY_DISPLAY,
+  WHATSAPP_PRIMARY_WA,
+  WHATSAPP_SECONDARY_DISPLAY,
+  buildWhatsAppLink,
+} from '@/lib/constants';
 
 const ContactoPage = () => {
   const { toast } = useToast();
@@ -62,31 +70,29 @@ const ContactoPage = () => {
 
   const contactInfo = [
     {
-      icon: MapPin,
-      title: 'Dirección',
-      content: 'Calle Principal 123, Ciudad, País',
-    },
-    {
       icon: Phone,
-      title: 'Teléfono',
-      content: '+1 (555) 123-4567',
+      title: 'WhatsApp',
+      content: `${WHATSAPP_PRIMARY_DISPLAY} / ${WHATSAPP_SECONDARY_DISPLAY}`,
     },
     {
       icon: Mail,
       title: 'Email',
-      content: 'hola@creacionesprincess.com',
+      content: BUSINESS_EMAIL,
     },
     {
       icon: Clock,
       title: 'Horario',
-      content: 'Lun - Sáb: 9:00 AM - 6:00 PM',
+      content: BUSINESS_HOURS,
+    },
+    {
+      icon: MapPin,
+      title: 'Ubicación',
+      content: BUSINESS_LOCATION_NOTE,
     },
   ];
 
   return (
     <div className="min-h-screen">
-      <Toaster />
-      
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-pink-50 via-cream-50 to-pink-50 py-20">
         <div className="container mx-auto px-4">
@@ -237,18 +243,24 @@ const ContactoPage = () => {
                 })}
               </div>
 
-              {/* Map Placeholder */}
-              <Card className="border-pink-100 overflow-hidden">
-                <CardContent className="p-0">
-                  <div className="relative h-64 bg-gray-200 flex items-center justify-center">
-                    <div className="text-center">
-                      <MapPin className="h-12 w-12 text-pink-400 mx-auto mb-2" />
-                      <p className="text-gray-600">Mapa - Ubicación</p>
-                      <p className="text-sm text-gray-500">Calle Principal 123</p>
+              {/* WhatsApp CTA */}
+              <a
+                href={buildWhatsAppLink(WHATSAPP_PRIMARY_WA, '¡Hola! Me gustaría hacer una consulta.')}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Card className="border-pink-100 overflow-hidden hover:shadow-md transition-shadow">
+                  <CardContent className="p-6 flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
+                      <MessageCircle className="h-6 w-6 text-green-600" />
                     </div>
-                  </div>
-                </CardContent>
-              </Card>
+                    <div>
+                      <h3 className="font-semibold text-gray-800 mb-1">Escríbenos directo por WhatsApp</h3>
+                      <p className="text-gray-600 text-sm">Respuesta más rápida para pedidos y consultas</p>
+                    </div>
+                  </CardContent>
+                </Card>
+              </a>
             </motion.div>
           </div>
         </div>
