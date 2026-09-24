@@ -7,7 +7,6 @@ import { motion } from 'framer-motion';
 import { ChevronRight, Clock, Users, ChefHat, Heart, CheckCircle2, ShoppingBasket, Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import RecipeCard from '@/components/recetario/RecipeCard';
-import StatusBadge from '@/components/recetario/StatusBadge';
 import SourceBadge from '@/components/recetario/SourceBadge';
 import { useRecipeFavorites } from '@/hooks/use-recipe-favorites';
 import { useShoppingList } from '@/hooks/use-shopping-list';
@@ -113,7 +112,6 @@ export default function RecipeDetailPage({ params }) {
           {/* Info */}
           <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }}>
             <div className="flex items-center gap-2 mb-3">
-              <StatusBadge status={recipe.status} />
               <SourceBadge source={recipe.source} />
             </div>
             <h1 className="text-4xl font-cursive text-primary mb-4">{recipe.title}</h1>

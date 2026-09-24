@@ -1,13 +1,19 @@
 'use client';
 
 import Link from 'next/link';
-import { Heart, Facebook, Instagram, Mail, Phone, MapPin } from 'lucide-react';
+import Image from 'next/image';
+import { Facebook, Instagram, Mail, Phone, MapPin } from 'lucide-react';
 import {
   BUSINESS_NAME,
   BUSINESS_EMAIL,
   BUSINESS_HOURS,
   BUSINESS_LOCATION_NOTE,
   WHATSAPP_PRIMARY_DISPLAY,
+  WHATSAPP_PRIMARY_WA,
+  WHATSAPP_SECONDARY_DISPLAY,
+  WHATSAPP_SECONDARY_WA,
+  INSTAGRAM_URL,
+  FACEBOOK_URL,
 } from '@/lib/constants';
 
 const Footer = () => {
@@ -18,7 +24,13 @@ const Footer = () => {
           {/* Brand */}
           <div>
             <div className="flex items-center space-x-2 mb-4">
-              <Heart className="h-8 w-8 text-primary fill-primary" />
+              <Image
+                src="/logo.jpeg"
+                alt={BUSINESS_NAME}
+                width={48}
+                height={48}
+                className="h-12 w-12 rounded-full object-cover"
+              />
               <div>
                 <h3 className="text-xl font-cursive text-primary">{BUSINESS_NAME}</h3>
               </div>
@@ -70,12 +82,21 @@ const Footer = () => {
             <h4 className="font-semibold text-gray-800 mb-4">Contacto</h4>
             <ul className="space-y-3">
               <li className="flex items-start space-x-2 text-sm text-gray-600">
-                <Phone className="h-4 w-4 mt-0.5 text-primary" />
-                <span>{WHATSAPP_PRIMARY_DISPLAY}</span>
+                <Phone className="h-4 w-4 mt-0.5 text-primary shrink-0" />
+                <span className="flex flex-col">
+                  <a href={`tel:+${WHATSAPP_SECONDARY_WA}`} className="hover:text-primary transition-colors">
+                    {WHATSAPP_SECONDARY_DISPLAY}
+                  </a>
+                  <a href={`tel:+${WHATSAPP_PRIMARY_WA}`} className="hover:text-primary transition-colors">
+                    {WHATSAPP_PRIMARY_DISPLAY}
+                  </a>
+                </span>
               </li>
               <li className="flex items-start space-x-2 text-sm text-gray-600">
-                <Mail className="h-4 w-4 mt-0.5 text-primary" />
-                <span>{BUSINESS_EMAIL}</span>
+                <Mail className="h-4 w-4 mt-0.5 text-primary shrink-0" />
+                <a href={`mailto:${BUSINESS_EMAIL}`} className="hover:text-primary transition-colors break-all">
+                  {BUSINESS_EMAIL}
+                </a>
               </li>
               <li className="flex items-start space-x-2 text-sm text-gray-600">
                 <MapPin className="h-4 w-4 mt-0.5 text-primary" />
@@ -89,7 +110,7 @@ const Footer = () => {
             <h4 className="font-semibold text-gray-800 mb-4">Síguenos</h4>
             <div className="flex space-x-4">
               <a
-                href="https://facebook.com"
+                href={FACEBOOK_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-pink-100 flex items-center justify-center hover:bg-pink-200 transition-colors"
@@ -97,7 +118,7 @@ const Footer = () => {
                 <Facebook className="h-5 w-5 text-primary" />
               </a>
               <a
-                href="https://instagram.com"
+                href={INSTAGRAM_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-mint-100 flex items-center justify-center hover:bg-mint-200 transition-colors"

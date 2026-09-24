@@ -1,8 +1,9 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { LayoutDashboard, Package, FolderTree, ClipboardList, Images, Mail, Heart, Share2, BookOpen } from 'lucide-react';
+import { LayoutDashboard, Package, FolderTree, ClipboardList, Images, Mail, Share2, BookOpen } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const NAV_ITEMS = [
@@ -23,7 +24,13 @@ const AdminSidebar = () => {
   return (
     <aside className="w-64 bg-white border-r border-pink-100 flex-shrink-0 min-h-screen hidden md:flex md:flex-col">
       <div className="h-20 flex items-center px-6 border-b border-pink-100">
-        <Heart className="h-6 w-6 text-primary fill-primary mr-2" />
+        <Image
+          src="/logo.jpeg"
+          alt="Creaciones Princess"
+          width={36}
+          height={36}
+          className="h-9 w-9 rounded-full object-cover mr-2"
+        />
         <span className="font-cursive text-xl text-primary">Princess Admin</span>
       </div>
       <nav className="flex-1 p-4 space-y-1">

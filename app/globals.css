@@ -41,6 +41,35 @@
   .font-cursive {
     font-family: 'Great Vibes', cursive;
   }
+
+  /* Tailwind resetea el cursor de los botones a "default" (como el navegador
+     nativo); lo devolvemos a "pointer" en todo lo clicable para que siempre
+     se vea la manita al pasar el mouse. */
+  a,
+  button,
+  select,
+  summary,
+  label[for],
+  [role='button'],
+  [role='link'],
+  [role='tab'],
+  [role='menuitem'],
+  [role='option'],
+  input[type='button'],
+  input[type='submit'],
+  input[type='reset'],
+  input[type='checkbox'],
+  input[type='radio'] {
+    cursor: pointer;
+  }
+
+  button:disabled,
+  input:disabled,
+  select:disabled,
+  [aria-disabled='true'],
+  [data-disabled='true'] {
+    cursor: not-allowed;
+  }
 }
 
 @layer utilities {

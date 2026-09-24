@@ -155,14 +155,19 @@ function ExplorarContent() {
       <section className="bg-gradient-to-br from-pink-50 via-mint-50 to-pink-50 py-16">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-4xl md:text-5xl font-cursive text-primary mb-4">Explorar Recetas</h1>
-          <form onSubmit={handleSearchSubmit} className="max-w-lg mx-auto relative">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 h-5 w-5" />
-            <Input
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder="Buscar por nombre o ingrediente..."
-              className="pl-11 h-12 border-pink-200 focus:border-primary bg-white"
-            />
+          <form onSubmit={handleSearchSubmit} className="max-w-lg mx-auto flex gap-2">
+            <div className="relative flex-1">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 h-5 w-5" />
+              <Input
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                placeholder="Buscar por nombre o ingrediente..."
+                className="pl-11 h-12 border-pink-200 focus:border-primary bg-white"
+              />
+            </div>
+            <Button type="submit" className="h-12 bg-gradient-to-r from-primary to-pink-500 hover:from-pink-500 hover:to-primary">
+              Buscar
+            </Button>
           </form>
         </div>
       </section>

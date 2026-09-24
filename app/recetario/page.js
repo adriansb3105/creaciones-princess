@@ -78,14 +78,19 @@ export default function RecetarioPage() {
               paso a paso.
             </p>
             <div className="flex items-center gap-3 max-w-lg mx-auto">
-              <form onSubmit={handleSearch} className="relative flex-1">
-                <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 h-5 w-5" />
-                <Input
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  placeholder="Buscar por nombre o ingrediente..."
-                  className="pl-11 h-12 border-pink-200 focus:border-primary bg-white"
-                />
+              <form onSubmit={handleSearch} className="relative flex-1 flex gap-2">
+                <div className="relative flex-1">
+                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 h-5 w-5" />
+                  <Input
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    placeholder="Buscar por nombre o ingrediente..."
+                    className="pl-11 h-12 border-pink-200 focus:border-primary bg-white"
+                  />
+                </div>
+                <Button type="submit" className="h-12 bg-gradient-to-r from-primary to-pink-500 hover:from-pink-500 hover:to-primary">
+                  Buscar
+                </Button>
               </form>
               <Link href="/recetario/lista-de-compras" className="relative flex-shrink-0">
                 <Button size="icon" variant="outline" className="h-12 w-12 border-pink-200 bg-white">

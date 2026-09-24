@@ -15,6 +15,7 @@ import {
   WHATSAPP_PRIMARY_DISPLAY,
   WHATSAPP_PRIMARY_WA,
   WHATSAPP_SECONDARY_DISPLAY,
+  WHATSAPP_SECONDARY_WA,
   buildWhatsAppLink,
 } from '@/lib/constants';
 
@@ -71,13 +72,16 @@ const ContactoPage = () => {
   const contactInfo = [
     {
       icon: Phone,
-      title: 'WhatsApp',
-      content: `${WHATSAPP_PRIMARY_DISPLAY} / ${WHATSAPP_SECONDARY_DISPLAY}`,
+      title: 'Teléfono',
+      links: [
+        { label: WHATSAPP_SECONDARY_DISPLAY, href: `tel:+${WHATSAPP_SECONDARY_WA}` },
+        { label: WHATSAPP_PRIMARY_DISPLAY, href: `tel:+${WHATSAPP_PRIMARY_WA}` },
+      ],
     },
     {
       icon: Mail,
       title: 'Email',
-      content: BUSINESS_EMAIL,
+      links: [{ label: BUSINESS_EMAIL, href: `mailto:${BUSINESS_EMAIL}` }],
     },
     {
       icon: Clock,
@@ -233,7 +237,21 @@ const ContactoPage = () => {
                             </div>
                             <div>
                               <h3 className="font-semibold text-gray-800 mb-1">{info.title}</h3>
-                              <p className="text-gray-600 text-sm">{info.content}</p>
+                              {info.links ? (
+                                <div className="flex flex-col">
+                                  {info.links.map((link) => (
+                                    <a
+                                      key={link.href}
+                                      href={link.href}
+                                      className="text-gray-600 text-sm hover:text-pink-500 transition-colors"
+                                    >
+                                      {link.label}
+                                    </a>
+                                  ))}
+                                </div>
+                              ) : (
+                                <p className="text-gray-600 text-sm">{info.content}</p>
+                              )}
                             </div>
                           </div>
                         </CardContent>

@@ -2,7 +2,8 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { Menu, X, Heart, ShoppingBag } from 'lucide-react';
+import Image from 'next/image';
+import { Menu, X, ShoppingBag } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/hooks/use-cart';
@@ -26,7 +27,14 @@ const Navbar = () => {
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
-            <Heart className="h-8 w-8 text-primary fill-primary" />
+            <Image
+              src="/logo.jpeg"
+              alt="Creaciones Princess"
+              width={56}
+              height={56}
+              className="h-14 w-14 rounded-full object-cover"
+              priority
+            />
             <div>
               <h1 className="text-2xl font-cursive text-primary">Creaciones Princess</h1>
               <p className="text-xs text-mint-600">Endulzando tus momentos</p>
