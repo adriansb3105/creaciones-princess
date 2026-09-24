@@ -81,6 +81,10 @@ scripts/recetario/*.wav
 # importación/imágenes — son datos de trabajo de una importación puntual
 # (con contenido de recetas de un chat de WhatsApp), no código del sitio.
 scripts/recetario/lote-*.json
+scripts/recetario/cr-lote-*.json
+scripts/recetario/cr-titulos.json
+scripts/recetario/latam-lote-*.json
+scripts/recetario/latam-titulos.json
 scripts/recetario/titulos.json
 scripts/recetario/pexels-queries.json
 scripts/recetario/imagenes-index.json
