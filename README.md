@@ -4,9 +4,11 @@ Sitio web y tienda para **Creaciones Princess**: postres, agendas y decoraciones
 artesanales. Catálogo por categorías y subcategorías, carrito de compras,
 checkout con adelanto del 50% coordinado por WhatsApp (Sinpe Móvil o
 transferencia — sin pasarela de pago), panel de administración privado, subida
-de imágenes a Cloudinary, videos embebidos de YouTube, y una pantalla móvil
+de imágenes a Cloudinary, videos embebidos de YouTube, una pantalla móvil
 (`/admin/publicar`) para publicar fotos/video de cada entrega en el sitio web,
-Instagram y Facebook con un solo formulario.
+Instagram y Facebook con un solo formulario, y un **recetario** (`/recetario`)
+con recetas guardadas de YouTube/TikTok/Instagram/Facebook, filtros, favoritos
+y estado de revisión — sin usar ningún servicio de pago.
 
 ## Stack técnico
 
@@ -25,20 +27,27 @@ app/
 ├── (public)                     # páginas públicas (usan Navbar/Footer/WhatsApp)
 │   page.js, productos/, productos/[slug]/, carrito/, checkout/,
 │   pedido-confirmado/[id]/, galeria/, sobre-nosotros/, contacto/
+│   recetario/, recetario/explorar/, recetario/receta/[slug]/,
+│   recetario/lista-de-compras/
 ├── admin/
 │   ├── login/page.js            # login público del panel
 │   ├── publicar/page.js         # pantalla móvil: publicar entrega (foto+video+caption)
 │   └── (dashboard)/             # protegido por proxy.js + requireAdmin()
-│       page.js, productos/, categorias/, pedidos/, galeria/, publicaciones/, mensajes/
+│       page.js, productos/, categorias/, pedidos/, galeria/, publicaciones/, mensajes/,
+│       recetario/, recetario/nueva/, recetario/[id]/, recetario/importar/
 └── api/
     ├── categories/, products/, orders/, gallery/, contact/, contact-messages/
+    ├── recipe-categories/, recipes/, recipes/[id]/
     ├── social/publish/, social/publish/[id]/retry-instagram/
-    └── admin/{login,logout,me,cloudinary/sign}/
+    └── admin/{login,logout,me,cloudinary/sign,recipes/detect,recipes/import}/
 
 components/            # Navbar, Footer, ProductCard, Lightbox, YouTubeEmbed...
-components/admin/      # Sidebar, Header, ProductForm, CloudinaryUploader...
+components/admin/      # Sidebar, Header, ProductForm, RecipeForm, CloudinaryUploader...
+components/recetario/  # RecipeCard, StatusBadge, SourceBadge
 lib/                   # mongodb.js, auth.js, constants.js, seed.js, utils.js, social.js
-hooks/use-cart.js      # carrito (Context + localStorage)
+lib/recipes/           # categorías, normalización, estado, plataformas, extractores,
+                        # parse-text.js, evidence.js, structure.js (importación sin IA)
+hooks/use-cart.js, use-recipe-favorites.js, use-shopping-list.js   # Context + localStorage
 proxy.js               # protege /admin y /api/admin (antes "middleware.js")
 ```
 
@@ -82,6 +91,13 @@ archivo que necesitas tocar para cambiarlos.
 
    Ve a http://localhost:3000/admin/login con el `ADMIN_EMAIL`/`ADMIN_PASSWORD`
    que pusiste en `.env`.
+
+5. **Correr los tests** (lógica pura del recetario: normalización de
+   ingredientes, detección de plataforma, cálculo de estado, parser de
+   importación y validación de evidencia)
+   ```bash
+   yarn test
+   ```
 
 ## Cómo funciona un pedido (sin pasarela de pago)
 
@@ -142,6 +158,64 @@ botón para **Reintentar** más tarde — no hay que volver a subir nada.
 **TikTok queda fuera de esta automatización por ahora** (su API de
 publicación requiere aprobación de TikTok que no está garantizada).
 
+## Recetario (`/recetario`)
+
+Recetas guardadas de YouTube, TikTok, Instagram y Facebook, organizadas en
+Desayunos / Almuerzos / Cenas / Snacks, con búsqueda, filtros, favoritos por
+visitante (en su navegador) y una regla estricta: **nunca se inventa
+información**. Si faltan ingredientes o pasos, la receta queda marcada
+`Incompleta` automáticamente (`lib/recipes/status.js` recalcula el estado en
+cada guardado — un admin no puede forzar "Verificada" en una receta a medias).
+
+**Dos formas de cargar recetas, las dos 100% gratis (sin APIs de pago ni IA):**
+
+**A. Manual** — `/admin/recetario/nueva`: pega el enlace y dale al botón de
+detectar (lupa) para traer automáticamente lo que cada red da gratis y sin
+cuenta, y completa ingredientes/pasos a mano.
+- **YouTube**: título y miniatura siempre; la descripción completa solo si
+  configuras `YOUTUBE_API_KEY` (gratis, cuota diaria — ver `.env.example`).
+- **TikTok**: título, autor y miniatura (el "título" de TikTok es el caption
+  del video).
+- **Instagram**: requiere que ya hayas configurado `META_PAGE_ACCESS_TOKEN`
+  (mismo token de la sección de arriba) — sin eso, Meta no deja traer nada.
+- **Facebook**: Meta nunca entrega el texto del post por API (confirmado en
+  pruebas), así que siempre hay que pegar la descripción a mano.
+
+**B. Importación asistida** — `/admin/recetario/importar`: pega el enlace y/o
+el texto (descripción, transcripción que hayas conseguido por tu cuenta), y
+un **parser determinista sin IA** (`lib/recipes/parse-text.js`) separa
+ingredientes y pasos automáticamente:
+- Reconoce líneas de ingredientes por su cantidad ("2 tazas de harina", "1/2
+  cdta de sal") y pasos por su numeración ("1. Mezclar todo").
+- Si el texto trae encabezados explícitos ("Ingredientes:", "Preparación:"),
+  confía en esa estructura para las líneas sin número — pero igual descarta
+  relleno típico de redes sociales (hashtags, "sígueme", links) que a veces
+  queda pegado al final.
+- Cada línea detectada guarda su **cita literal** del texto original
+  (`evidence`); el servidor verifica que esa cita exista de verdad en la
+  fuente antes de aceptarla (`lib/recipes/evidence.js`) — nunca se inventa
+  un ingrediente o un paso que no esté escrito.
+- Lo que no se puede clasificar queda aparte ("texto sin clasificar") para
+  que lo agregues a mano.
+- Al guardar, la receta queda como **"Requiere revisión"** hasta que marques
+  la casilla de confirmación (comparando contra el texto de la fuente,
+  visible en el mismo formulario) — recién ahí puede pasar a "Verificada".
+
+Publica la receta cuando esté lista, desde cualquiera de los dos flujos.
+
+Los favoritos se guardan en el navegador de cada visitante (no requieren
+cuenta); todo lo demás vive en las mismas colecciones de Mongo que el resto
+del sitio.
+
+**Lista de compras** (`/recetario/lista-de-compras`): desde cualquier receta
+se puede agregar un ingrediente suelto o todos de una vez. También vive solo
+en el navegador de cada visitante (`hooks/use-shopping-list.js`), igual que
+favoritos y el carrito — no hace falta cuenta. Dos ingredientes solo se
+combinan en una fila si coincide el nombre normalizado, la unidad, **y ambas
+cantidades son números reales** (`lib/recipes/normalize.js` → `parseQuantity`
+/ `sameIngredient`); algo como "sal al gusto" nunca se suma con un número,
+queda como fila aparte para no inventar una cantidad.
+
 ## Despliegue en Vercel
 
 El proyecto está listo para desplegar tal cual (sin `output: 'standalone'`,
@@ -169,6 +243,9 @@ con `serverExternalPackages` e imágenes remotas configuradas para Cloudinary):
 | `admin_users`        | Usuarios del panel admin (contraseña cifrada con bcrypt)    |
 | `counters`           | Contador atómico para los números de pedido (`CP-...`)     |
 | `delivery_posts`     | Historial de publicaciones hechas desde `/admin/publicar` (con el resultado en cada red) |
+| `recipe_categories`  | Desayunos / Almuerzos / Cenas / Snacks (se pueden agregar más)   |
+| `recipes`            | Recetas con ingredientes/pasos embebidos, fuente y estado         |
+| `recipe_import_jobs` | Registro de cada análisis hecho en `/admin/recetario/importar` (para trazabilidad) |
 
 ## Próximas mejoras sugeridas
 
@@ -177,6 +254,9 @@ con `serverExternalPackages` e imágenes remotas configuradas para Cloudinary):
 - [ ] PWA con notificaciones
 - [ ] Múltiples administradores con roles
 - [ ] Publicación automática en TikTok (pendiente de aprobación de su API)
+- [ ] Carga por lote de las ~100 recetas: transcripción local (yt-dlp +
+      faster-whisper) + estructuración asistida en una sesión de Claude Code +
+      inserción validada contra evidencia (ver el plan en el historial)
 
 ---
 

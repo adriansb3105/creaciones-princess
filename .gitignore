@@ -66,6 +66,26 @@ chainlit.md
 # Data and databases
 agenthub/agents/youtube/db
 
+# Fase 4 del recetario: datos personales (chat exportado, enlaces, audio,
+# transcripciones) — nunca se suben al repo.
+scripts/recetario/*.txt
+!scripts/recetario/requirements.txt
+scripts/recetario/checkpoint.json
+scripts/recetario/reporte.json
+scripts/recetario/salida/
+scripts/recetario/audio/
+scripts/recetario/*.mp3
+scripts/recetario/*.wav
+
+# Fase 4 del recetario: lotes ya estructurados e informes de cada corrida de
+# importación/imágenes — son datos de trabajo de una importación puntual
+# (con contenido de recetas de un chat de WhatsApp), no código del sitio.
+scripts/recetario/lote-*.json
+scripts/recetario/titulos.json
+scripts/recetario/pexels-queries.json
+scripts/recetario/imagenes-index.json
+scripts/recetario/reporte-imagenes*.json
+
 # Archive files and large assets
 **/*.zip
 **/*.tar.gz
@@ -85,3 +105,6 @@ node_modules/@next/swc-linux-arm64-gnu/next-swc.linux-arm64-gnu.node
 .next/dev/cache/turbopack/v16.3.4-299180d3/00000092.sst
 .next/dev/cache/turbopack/v16.3.4-299180d3/00000093.sst
 node_modules/@next/swc-win32-x64-msvc/next-swc.win32-x64-msvc.node
+.next/dev/cache/turbopack/v16.3.4-299180d3/00000244.sst
+.next/dev/cache/turbopack/v16.3.4-299180d3/00000319.sst
+.next/dev/cache/turbopack/v16.3.4-299180d3/00000320.sst

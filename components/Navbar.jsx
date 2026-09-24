@@ -14,6 +14,7 @@ const Navbar = () => {
   const menuItems = [
     { name: 'Inicio', href: '/' },
     { name: 'Tienda', href: '/productos' },
+    { name: 'Recetario', href: '/recetario' },
     { name: 'Galería', href: '/galeria' },
     { name: 'Sobre Nosotros', href: '/sobre-nosotros' },
     { name: 'Contacto', href: '/contacto' },
